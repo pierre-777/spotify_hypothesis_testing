@@ -1,0 +1,83 @@
+# Cursor AI Ignore File - Prevent Sensitive Data Exposure
+# This file prevents Cursor from including sensitive files in AI context
+
+# 🔒 ENVIRONMENT & SECRETS (CRITICAL)
+# NOTE: .env is NOT ignored so AI can see it exists (prevents duplicate creation)
+# but contents should never be read by AI assistants
+.env.*
+*.env.local
+*.env.production
+*.env.staging
+.environment
+secrets.json
+config.json
+credentials.json
+auth.json
+
+# 🎵 SPOTIFY API CACHE & TOKENS
+.cache
+.cache-*
+*.cache
+.spotipy_cache
+.spotify_token
+
+# 🔑 API KEYS & CREDENTIALS
+api_keys.txt
+keys.txt
+tokens.txt
+*.key
+*.pem
+*.p12
+*.pfx
+
+# 💾 DATABASES & DATA FILES
+# Ignore sensitive data files but allow Spotify API data
+*.db
+*.sqlite
+*.sqlite3
+# Ignore all data files except Spotify API data
+data/*.csv
+data/*.json
+data/*.parquet
+datasets/
+*.dump
+# Explicitly allow Spotify API data files
+!data/spotify_*.csv
+!data/spotify_*.json
+!data/spotify_*.parquet
+
+# 📊 EXPERIMENT & ANALYSIS RESULTS
+experiments/
+results/
+models/
+checkpoints/
+
+# 🗂️ SYSTEM & TEMP FILES
+*.log
+logs/
+temp/
+tmp/
+cache/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
+
+# 🏗️ BUILD & DISTRIBUTION
+build/
+dist/
+*.egg-info/
+node_modules/
+
+# 📝 IDE & EDITOR FILES
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# 📋 DOCUMENTATION DRAFTS (if containing sensitive info)
+NOTES.md
+TODO.md
+PRIVATE.md 

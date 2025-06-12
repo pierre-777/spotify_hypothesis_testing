@@ -1,0 +1,34 @@
+# Spotify Song Title Hypothesis Testing - Environment Configuration
+# =================================================================
+# 
+# This file contains the required environment variables for the
+# Spotify Song Title Complexity Analysis project.
+#
+# 🎯 Research Focus: Single-word vs Multi-word title popularity analysis
+# 📊 Data Collection: 8000 tracks across 8 mainstream genres
+# ⚡ Collection Time: ~21 minutes with optimized 3-phase architecture
+
+# Spotify Web API Credentials
+# ---------------------------
+# Get these from: https://developer.spotify.com/dashboard
+# Note: Development mode is sufficient (no extended quota needed)
+
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
+
+# Instructions:
+# 1. Copy this file to .env: cp env_template.txt .env
+# 2. Replace the placeholder values with your actual Spotify API credentials
+# 3. Keep .env private (already included in .gitignore)
+#
+# ⚠️  Development Mode Limitations (Not a Problem for This Project):
+# - Audio features endpoint requires extended quota (business accounts)
+# - Our solution uses available endpoints: search, tracks, artists
+# - Full feature engineering happens on title text analysis
+
+# Optional: Database configuration
+DATABASE_URL=sqlite:///spotify_hypothesis_testing.db
+
+# Optional: Flask configuration for web dashboard
+FLASK_SECRET_KEY=your_secret_key_here
+FLASK_ENV=development 

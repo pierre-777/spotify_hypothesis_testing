@@ -1,0 +1,99 @@
+# Environment variables (IMPORTANT - contains API keys)
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+spotify_env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data files (may contain sensitive information)
+data/
+*.csv
+*.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache directory (API response cache)
+cache/
+
+# Spotify API token cache (spotipy generates this)
+.cache
+.cache-*
+
+# Experiments directory (A/B test results)
+experiments/
+
+# Generated reports and plots
+reports/
+plots/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Additional items to exclude
+# Test outputs and temporary analysis files
+test_output/
+analysis_temp/
+*.pkl
+*.pickle
+
+# PyCharm specific
+.idea/
+
+# Local configuration overrides
+config_local.py 
