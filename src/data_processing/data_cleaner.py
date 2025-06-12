@@ -63,19 +63,29 @@ class SpotifyDataCleaner:
         print("\n🔍 HANDLING MISSING VALUES")
         print("-" * 40)
         
+        # Remove completely empty rows first
+        initial_count = len(self.df)
+        self.cleaned_df = self.df.dropna(how='all')
+        empty_rows_removed = initial_count - len(self.cleaned_df)
+        if empty_rows_removed > 0:
+            print(f"Removed {empty_rows_removed:,} completely empty rows")
+        
         # Check for missing values
-        missing = self.df.isnull().sum()
+        missing = self.cleaned_df.isnull().sum()
         if missing.any():
             print("Missing values found:")
             for col, count in missing[missing > 0].items():
                 print(f"  • {col}: {count:,}")
-        
-        # Handle missing values
-        self.cleaned_df = self.df.copy()
+        else:
+            print("✅ No missing values found")
         
         # Drop rows with missing key values
-        key_cols = ['track_name', 'artist_name', 'popularity', 'duration_ms', 'genre']
+        key_cols = ['track_name', 'artist_name', 'popularity', 'duration_ms', 'genre_category']
+        before_key_drop = len(self.cleaned_df)
         self.cleaned_df = self.cleaned_df.dropna(subset=key_cols)
+        key_rows_removed = before_key_drop - len(self.cleaned_df)
+        if key_rows_removed > 0:
+            print(f"Removed {key_rows_removed:,} rows with missing key values")
         
         # Fill missing values in derived features
         if 'title_length' in self.cleaned_df.columns:
@@ -218,10 +228,11 @@ class SpotifyDataCleaner:
         print("1. Testing for normality:")
         
         # Shapiro-Wilk test for smaller samples, Anderson-Darling for larger
-        if len(self.cleaned_df) < 5000:
-            title_stat, title_p = stats.shapiro(self.cleaned_df['title_length'].sample(5000))
-            word_stat, word_p = stats.shapiro(self.cleaned_df['word_count'].sample(5000))
-            pop_stat, pop_p = stats.shapiro(self.cleaned_df['popularity'].sample(5000))
+        sample_size = min(5000, len(self.cleaned_df))
+        if sample_size < 5000:
+            title_stat, title_p = stats.shapiro(self.cleaned_df['title_length'].sample(sample_size))
+            word_stat, word_p = stats.shapiro(self.cleaned_df['word_count'].sample(sample_size))
+            pop_stat, pop_p = stats.shapiro(self.cleaned_df['popularity'].sample(sample_size))
             test_name = "Shapiro-Wilk"
         else:
             title_stat, title_p = stats.normaltest(self.cleaned_df['title_length'])

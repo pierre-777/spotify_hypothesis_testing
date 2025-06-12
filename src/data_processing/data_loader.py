@@ -60,7 +60,8 @@ class SpotifyDataLoader:
             'title_length_range': (self.df['title_length'].min(), self.df['title_length'].max()) if 'title_length' in self.df.columns else None,
             'word_count_range': (self.df['word_count'].min(), self.df['word_count'].max()) if 'word_count' in self.df.columns else None,
             'popularity_range': (self.df['popularity'].min(), self.df['popularity'].max()) if 'popularity' in self.df.columns else None,
-            'genres': self.df['genre'].unique().tolist() if 'genre' in self.df.columns else [],
+            'release_year_range': (self.df['release_year'].min(), self.df['release_year'].max()) if 'release_year' in self.df.columns else None,
+            'genres': self.df['genre_category'].unique().tolist() if 'genre_category' in self.df.columns else [],
             'has_numbers': self.df['has_numbers'].value_counts().to_dict() if 'has_numbers' in self.df.columns else {},
             'has_special_chars': self.df['has_special_chars'].value_counts().to_dict() if 'has_special_chars' in self.df.columns else {}
         }
@@ -87,6 +88,9 @@ class SpotifyDataLoader:
         if self.summary['popularity_range']:
             print(f"⭐ Popularity range: {self.summary['popularity_range'][0]}-{self.summary['popularity_range'][1]}")
         
+        if self.summary['release_year_range']:
+            print(f"📅 Release year range: {self.summary['release_year_range'][0]}-{self.summary['release_year_range'][1]}")
+        
         if self.summary['genres']:
             print(f"\n🎵 Genres ({len(self.summary['genres'])}):")
             for genre in sorted(self.summary['genres']):
@@ -109,7 +113,7 @@ class SpotifyDataLoader:
     
     def get_key_columns(self) -> list:
         """Get list of key columns for analysis"""
-        return ['track_name', 'artist_name', 'popularity', 'title_length', 'word_count', 'has_numbers', 'has_special_chars', 'genre']
+        return ['track_name', 'artist_name', 'popularity', 'title_length', 'word_count', 'has_numbers', 'has_special_chars', 'genre_category']
 
 def run_data_loading():
     """Main function to run data loading"""
